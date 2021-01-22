@@ -1,8 +1,12 @@
 <?php
-
 require __DIR__.'/config.php';
 
+$newsCrudObj = new NewsCrud();
 
+  // Insert Record in customer table
+  if(isset($_POST['createNews'])) {
+    $newsCrudObj->insertData($_POST);
+  }
 
 ?>
 <html>
@@ -18,8 +22,8 @@ require __DIR__.'/config.php';
            
     </head>
     <body>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                <a class="navbar-brand" href="/index.php">Navbar</a>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <a class="navbar-brand" href="index.php">Navbar</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                 </button>
@@ -46,28 +50,23 @@ require __DIR__.'/config.php';
             </ul>
         </div>
     </nav>
-        <div class="container">
-        <div class="page-header">
-                <h1>News Details</h1>
-            </div>
-            <table class="table table-hover">
-                <caption><i class="fa fa-rocket"></i> These ships are ready for their next Mission</caption>
-                <thead>
-                    <tr>
-                        <th>SI.No</th>
-                        <th>Headline</th>
-                        <th>CreationDate</th>
-                    </tr>
-                </thead>
-                <tbody>
-                        <tr>
-                            <td>as</td>
-                            <td>as</td>
-                            <td>asd</td>
-                        </tr>
-                </tbody>
-            </table>
+    <div class="container">
+        <form class="form-horizontal" action="/Createnews.php" method="POST">
+        <div class="form-group">
+            <label for="exampleInputEmail1">Headline</label>
+            <input type="text" name="headline" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter headline">
         </div>
+        <div class="form-group">
+            <label for="exampleInputEmail1">content</label>
+            <input type="text" name="content" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter content">
+        </div>
+        
+        <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="exampleCheck1">
+            <label class="form-check-label" name="activeflag" value=1 for="exampleCheck1">Make News Active</label>
+        </div>
+        <button type="submit" name="createNews" class="btn btn-primary">Save</button>
+        </form>
+    </div>
     </body>
 </html>
-

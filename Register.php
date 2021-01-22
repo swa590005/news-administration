@@ -1,8 +1,21 @@
 <?php
-
 require __DIR__.'/config.php';
 
+$container= new Container();
 
+if(isset($_POST['register'])){
+    $username=$_POST['username'];
+    $useremail=$_POST['useremail'];
+    $userpassword=$_POST['userpassword'];
+    if($username!='' && $useremail!='' && $userpassword!='')
+    {
+        $response=$container->UserRegister($username, $useremail, $userpassword);
+        
+    }else{
+        $error="Please fill in the details";
+        
+    }
+}
 
 ?>
 <html>
@@ -18,8 +31,8 @@ require __DIR__.'/config.php';
            
     </head>
     <body>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                <a class="navbar-brand" href="/index.php">Navbar</a>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+                <a class="navbar-brand" href="index.php">Navbar</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class="navbar-toggler-icon"></span>
                 </button>
@@ -46,28 +59,26 @@ require __DIR__.'/config.php';
             </ul>
         </div>
     </nav>
-        <div class="container">
-        <div class="page-header">
-                <h1>News Details</h1>
-            </div>
-            <table class="table table-hover">
-                <caption><i class="fa fa-rocket"></i> These ships are ready for their next Mission</caption>
-                <thead>
-                    <tr>
-                        <th>SI.No</th>
-                        <th>Headline</th>
-                        <th>CreationDate</th>
-                    </tr>
-                </thead>
-                <tbody>
-                        <tr>
-                            <td>as</td>
-                            <td>as</td>
-                            <td>asd</td>
-                        </tr>
-                </tbody>
-            </table>
+    <div class="container">
+        <form class="form-horizontal" action="/Register.php" method="POST">
+        <div class="form-group">
+            <label for="exampleInputEmail1">User Name</label>
+            <input type="text" name="username" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
         </div>
+        <div class="form-group">
+            <label for="exampleInputEmail1">Email address</label>
+            <input type="email" name="useremail" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+        </div>
+        <div class="form-group">
+            <label for="exampleInputPassword1">Password</label>
+            <input type="password" name="userpassword" class="form-control" id="exampleInputPassword1" placeholder="Password">
+        </div>
+        <div class="form-check">
+            <input type="checkbox" class="form-check-input" id="exampleCheck1">
+            <label class="form-check-label" for="exampleCheck1">Check me out</label>
+        </div>
+        <button type="submit" name="register" class="btn btn-primary">Submit</button>
+        </form>
+    </div>
     </body>
 </html>
-
