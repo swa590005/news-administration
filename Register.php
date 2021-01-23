@@ -1,20 +1,10 @@
 <?php
 require __DIR__.'/config.php';
 
-$container= new Container();
+$newsCrudObj = new NewsCrud();
 
 if(isset($_POST['register'])){
-    $username=$_POST['username'];
-    $useremail=$_POST['useremail'];
-    $userpassword=$_POST['userpassword'];
-    if($username!='' && $useremail!='' && $userpassword!='')
-    {
-        $response=$container->UserRegister($username, $useremail, $userpassword);
-        
-    }else{
-        $error="Please fill in the details";
-        
-    }
+    $newsCrudObj->UserRegister($_POST);
 }
 
 ?>
@@ -43,18 +33,15 @@ if(isset($_POST['register'])){
                     <a class="nav-link" href="Register.php">Register <span class="sr-only">(current)</span></a>
                 </li>
                 <li>
-                    <a class="nav-link" href="#">Login <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="Login.php">Login <span class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Dropdown
-                    </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Something else here</a>
-                </div>
+                <li>
+                    <a class="nav-link" href="Overview.php">Dashboard <span class="sr-only">(current)</span></a>
+                </li>
+                <li>
+                    <a class="nav-link" href="Createnews.php">Create News <span class="sr-only">(current)</span></a>
+                </li>
+                
       </li>
             </ul>
         </div>
@@ -73,11 +60,8 @@ if(isset($_POST['register'])){
             <label for="exampleInputPassword1">Password</label>
             <input type="password" name="userpassword" class="form-control" id="exampleInputPassword1" placeholder="Password">
         </div>
-        <div class="form-check">
-            <input type="checkbox" class="form-check-input" id="exampleCheck1">
-            <label class="form-check-label" for="exampleCheck1">Check me out</label>
-        </div>
-        <button type="submit" name="register" class="btn btn-primary">Submit</button>
+        
+        <button type="submit" name="register" class="btn btn-primary">Register</button>
         </form>
     </div>
     </body>

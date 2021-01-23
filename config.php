@@ -1,9 +1,11 @@
 <?php
 //require __DIR__.'/vendor/autoload.php';
 
+
+require_once __DIR__.'/lib/Session.php';
+require_once __DIR__.'/lib/NewsCrud.php';
 require_once __DIR__.'/lib/Container.php';
 require_once __DIR__.'/lib/PdoStorage.php';
-require_once __DIR__.'/lib/NewsCrud.php';
 
 $configuration = array(
         'db_dsn'=> 'mysql:host=localhost;port=8000;dbname=news_db',

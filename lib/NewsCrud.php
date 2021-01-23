@@ -1,7 +1,44 @@
 <?php
 class NewsCrud
 {
-    
+    // Insert user data 
+    public function UserRegister($post)
+    {
+        $username=$_POST['username'];
+        $useremail=$_POST['useremail'];
+        $userpassword=$_POST['userpassword'];
+        if($username!='' && $useremail!='' && $userpassword!='')
+        {
+            
+            $pdo = new PDO('mysql:host=localhost;dbname=news_db', 'root','password');
+            $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $sql = "INSERT INTO users (username, useremail, userpassword) VALUES (?,?,?)";
+            $statement= $pdo->prepare($sql);
+            $result=$statement->execute([$username, $useremail, $userpassword]);
+            if ($result==true) {
+                header("Location:login.php");
+            }else{
+                echo "Registration failed try again!";
+            }
+        }else{
+            echo "Please fill in the details";
+        }
+        
+    }
+
+    public function UserLogin($post)
+    {
+        
+        $pdo = new PDO('mysql:host=localhost;dbname=news_db', 'root','password');
+        $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+        $statement=$pdo->prepare('Select * from user where useremail = :useremail && userpassword=:userpassword');
+        $statement->execute(array('useremail' => $_POST['useremail'], 
+                                    'userpassword'=> $_POST['userpassword']));
+        $userArray = $statement->fetchAll(\PDO ::FETCH_ASSOC);
+
+        return $userArray;
+    }
+
     // Insert news data into news_properties table
     public function insertData($post)
     {

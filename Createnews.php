@@ -45,18 +45,15 @@ $newsCrudObj = new NewsCrud();
                     <a class="nav-link" href="Register.php">Register <span class="sr-only">(current)</span></a>
                 </li>
                 <li>
-                    <a class="nav-link" href="#">Login <span class="sr-only">(current)</span></a>
+                    <a class="nav-link" href="Login.php">Login <span class="sr-only">(current)</span></a>
                 </li>
-                <li class="nav-item dropdown">
-                    <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                    Dropdown
-                    </a>
-                <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <a class="dropdown-item" href="#">Action</a>
-                    <a class="dropdown-item" href="#">Another action</a>
-                <div class="dropdown-divider"></div>
-                    <a class="dropdown-item" href="#">Something else here</a>
-                </div>
+                <li>
+                    <a class="nav-link" href="Overview.php">Dashboard <span class="sr-only">(current)</span></a>
+                </li>
+                <li>
+                    <a class="nav-link" href="Createnews.php">Create News <span class="sr-only">(current)</span></a>
+                </li>
+                
       </li>
             </ul>
         </div>
