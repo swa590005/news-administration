@@ -39,12 +39,12 @@ class NewsCrud
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
         $statement=$pdo->prepare('Select * from news_properties where id = :id');
         $statement->execute(array('id' => $id));
-        $shipArray = $statement->fetch(\PDO ::FETCH_ASSOC);
-        if(!$shipArray)
+        $newsArray = $statement->fetch(\PDO ::FETCH_ASSOC);
+        if(!$newsArray)
         {
             return null;
         }
-        return $shipArray;
+        return $newsArray;
     }
 
     // Update news data into news_properties table
@@ -58,10 +58,15 @@ class NewsCrud
             WHERE id = :newsId";
         $statement = $pdo->prepare($sql);                                  
         $statement->bindParam(':headline', $_POST['headline'], PDO::PARAM_STR);       
-        $statement->bindParam(':content', $_POST['$content'], PDO::PARAM_STR);    
+        $statement->bindParam(':content', $_POST['content'], PDO::PARAM_STR);    
         $statement->bindParam(':activeflag', $_POST['activeflag'], PDO::PARAM_STR);  
         $statement->bindParam(':newsId', $_POST['newsId'], PDO::PARAM_INT);   
-        $statement->execute();
+        $result=$statement->execute();
+        if ($result==true) {
+            header("Location:Overview.php?msg2=update");
+        }else{
+            echo "Registration failed try again!";
+        }
         
     }
 

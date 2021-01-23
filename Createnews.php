@@ -1,12 +1,23 @@
 <?php
 require __DIR__.'/config.php';
 
+$update = false;
 $newsCrudObj = new NewsCrud();
 
-  // Insert Record in customer table
+  // Insert Record 
   if(isset($_POST['createNews'])) {
     $newsCrudObj->insertData($_POST);
   }
+  if(isset($_GET['editId']) && !empty($_GET['editId'])) {
+        $editId = $_GET['editId'];
+        $update = true;
+        $newsrecords = $newsCrudObj->displyaRecordById($editId);
+  }
+  // Update Record 
+  if(isset($_POST['updateNews'])) {
+    $_POST['activeflag']=1;
+    $newsCrudObj->updateRecord($_POST);
+  } 
 
 ?>
 <html>
@@ -54,18 +65,27 @@ $newsCrudObj = new NewsCrud();
         <form class="form-horizontal" action="/Createnews.php" method="POST">
         <div class="form-group">
             <label for="exampleInputEmail1">Headline</label>
-            <input type="text" name="headline" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter headline">
+            <input value="<?php echo $newsrecords['headline']; ?>" type="text" name="headline" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter headline">
         </div>
         <div class="form-group">
             <label for="exampleInputEmail1">content</label>
-            <input type="text" name="content" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter content">
+            <input value="<?php echo $newsrecords['content']; ?>" type="text" name="content" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter content">
         </div>
         
         <div class="form-check">
             <input type="checkbox" class="form-check-input" id="exampleCheck1">
             <label class="form-check-label" name="activeflag" value=1 for="exampleCheck1">Make News Active</label>
         </div>
-        <button type="submit" name="createNews" class="btn btn-primary">Save</button>
+        
+
+        <?php if ($update == true): ?>
+            
+            <input type="hidden" name="newsId" value="<?php echo $newsrecords['id']; ?>">
+	        <button type="submit" name="updateNews" class="btn btn-primary">Update</button>
+        <?php else: ?>
+	        <button type="submit" name="createNews" class="btn btn-primary">Save</button>
+        <?php endif ?>
+
         </form>
     </div>
     </body>

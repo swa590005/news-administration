@@ -97,7 +97,7 @@ if(isset($_GET['deleteId']) && !empty($_GET['deleteId'])) {
             <td><?php echo $newsrecord['createddate'] ?></td>
             <td><?php echo $newsrecord['activeflag'] ?></td>
             <td>
-                <a href="edit.php?editId=<?php echo $newsrecord['id'] ?>" style="color:green">
+                <a href="Createnews.php?editId=<?php echo $newsrecord['id'] ?>" style="color:green">
                 <i class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp
                 <a href="Overview.php?deleteId=<?php echo $newsrecord['id'] ?>" style="color:red" onclick="confirm('Are you sure want to delete this record')">
                 <i class="fa fa-trash" aria-hidden="true"></i>
