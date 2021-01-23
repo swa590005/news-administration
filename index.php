@@ -5,7 +5,8 @@ Session::checkSession();
 if(isset($_GET['action']) && $_GET['action']=="logout"){
     Session::destroy();
 }
-
+$newsCrudObj = new NewsCrud();
+echo $_SERVER['REQUEST_URI'];
 ?>
 <html>
     <head>
@@ -62,11 +63,17 @@ if(isset($_GET['action']) && $_GET['action']=="logout"){
                     </tr>
                 </thead>
                 <tbody>
+                <?php 
+                    $newsrecords = $newsCrudObj->displayData(); 
+                    foreach ($newsrecords as $newsrecord) {
+                    ?>
+                        <input type="hidden" name="newsId" value="<?php echo $newsrecord['id']; ?>">
                         <tr>
-                            <td>as</td>
-                            <td>as</td>
-                            <td>asd</td>
+                            <td><?php echo $newsrecord['id'] ?></td>
+                            <td><a href="#"><?php echo $newsrecord['headline'] ?></a></td>
+                            <td><?php echo $newsrecord['createddate'] ?></td>
                         </tr>
+                <?php } ?>
                 </tbody>
             </table>
         </div>
