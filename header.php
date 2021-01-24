@@ -23,16 +23,20 @@
     <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
         <div class="col-lg-10">
+        <?php if(Session::get('userrole')!=''):?>
+            <a class="navbar-brand" href="userDashboard.php" style="color:#fff;">News Administration</a>
+        <?php else:?>
             <a class="navbar-brand" href="#" style="color:#fff;">News Administration</a>
+        <?php endif;?>
         </div>
         <div class="col-lg-2" style="margin-top:8px">
-            <div class="btn-group">
-            <a  href="#" class="btn btn-primary">Settings</a> 
+            <div class="btn-group">            
             <a  href="#" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"
             aria-expanded="false">
+            Settings
             <span class="caret"></span>
         </a> 
-        <ul class="dropdown-menu">
+        <ul class="dropdown-menu p-3">
         <?php $login_url='http://'.$_SERVER['SERVER_NAME'].$_SERVER['PHP_SELF'];?>
             <?php if($login_url=='http://localhost/index.php'):?>
                 <li ><a href="login.php">Login</a></li>

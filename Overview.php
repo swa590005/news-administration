@@ -1,5 +1,10 @@
 <?php
+ob_start();
 require __DIR__.'/config.php';
+Session::checkSession();
+if(Session::get('userrole')==1){
+  Session::destroy();
+}
 include('header.php');
 include('footer.php');
 
@@ -16,25 +21,23 @@ if(isset($_GET['deleteId']) && !empty($_GET['deleteId'])) {
     if (isset($_GET['msg1']) == "insert") {
       echo "<div class='alert alert-success alert-dismissible'>
               <button type='button' class='close' data-dismiss='alert'>&times;</button>
-              Your Registration added successfully
+              Data added successfully
             </div>";
       } 
     if (isset($_GET['msg2']) == "update") {
       echo "<div class='alert alert-success alert-dismissible'>
               <button type='button' class='close' data-dismiss='alert'>&times;</button>
-              Your Registration updated successfully
+              Data updated successfully
             </div>";
     }
     if (isset($_GET['msg3']) == "delete") {
       echo "<div class='alert alert-success alert-dismissible'>
               <button type='button' class='close' data-dismiss='alert'>&times;</button>
-              Record deleted successfully
+              Data deleted successfully
             </div>";
     }
   ?>
-  <h2>View Records
-    <a href="Createnews.php" class="btn btn-primary" style="float:right;">Add New Record</a>
-  </h2>
+  <h2 class="overview-headline">All Available News</h2>
   <table class="table table-hover">
     <thead>
       <tr>
@@ -43,6 +46,7 @@ if(isset($_GET['deleteId']) && !empty($_GET['deleteId'])) {
         <th>Content</th>
         <th>Created Date</th>
         <th>Status</th>
+        <th>Actions</th>
       </tr>
     </thead>
     <tbody>
@@ -54,7 +58,7 @@ if(isset($_GET['deleteId']) && !empty($_GET['deleteId'])) {
             <td><?php echo $newsrecord['id'] ?></td>
             <td><?php echo $newsrecord['headline'] ?></td>
             <td><?php echo $newsrecord['content'] ?></td>
-            <td><?php echo $newsrecord['createddate'] ?></td>
+            <td><?php echo date('d-m-Y',strtotime($newsrecord['createddate'])); ?></td>
               <?php 
                 if($newsrecord['activeflag']==1)
                 {
@@ -66,15 +70,20 @@ if(isset($_GET['deleteId']) && !empty($_GET['deleteId'])) {
                   <td>inactive</td>
             <?php } ?>
             <td>
-                <input type="hidden" name="editId" value="<?php echo $newsrecord['id']; ?>">
-                <a href="Createnews.php?editId=<?php echo $newsrecord['id'] ?>" style="color:green">
-                <i class="fa fa-pencil" aria-hidden="true"></i></a>&nbsp
-                <a href="Overview.php?deleteId=<?php echo $newsrecord['id'] ?>" style="color:red" onclick="confirm('Are you sure want to delete this record')">
-                <i class="fa fa-trash" aria-hidden="true"></i>
-                </a>
+                <button>
+                  <a href="Createnews.php?editId=<?php echo $newsrecord['id'] ?>" style="color:green">
+                    Edit
+                  </a>
+                </button>
+                <button>
+                  <a href="Overview.php?deleteId=<?php echo $newsrecord['id'] ?>" style="color:red" onclick="confirm('Are you sure want to delete this record')">  
+                    Delete
+                  </a>
+                </button>
             </td>
             </tr>
         <?php } ?>
     </tbody>
   </table>
+  <a href="Createnews.php" class="btn btn-primary">Add New Record</a>
 </div>

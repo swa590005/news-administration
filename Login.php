@@ -1,5 +1,5 @@
 <?php
-
+ob_start();
 require __DIR__.'/config.php';
 Session::init();
 
@@ -10,6 +10,7 @@ if(isset($_POST['login'])){
     $userpassword=$_POST['userpassword'];
     if($useremail!='' && $userpassword!='')
     {   
+        $_POST['userpassword']=sha1($userpassword);
         $response=$newsCrudObj->UserLogin($_POST);
         if($response){
             
@@ -53,9 +54,11 @@ include('footer.php');
                         <button type="submit" name="login" class="btn btn-primary">Login</button>
                         </div>
                         <div class="col-lg-10 pt-3">
-                            <div class="alert alert-dismissable alert-warning">
+                        <?php if(isset($_POST['login'])):?>
+                            <div class="alert alert-dismissable alert-warning p-1">
                                 <p><?php echo $error; ?></p>
                             </div>
+                        <?php endif;?>
                         </div>
                     </div>
                 </div>

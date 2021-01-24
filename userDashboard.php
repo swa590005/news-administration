@@ -1,5 +1,5 @@
 <?php
-
+ob_start();
 require __DIR__.'/config.php';
 Session::checkSession();
 include('header.php');
@@ -32,7 +32,7 @@ $newsCrudObj = new NewsCrud();
                         <tr>
                             <td><?php echo $newsrecord['id'] ?></td>
                             <td><a href="Detailpage.php?editId=<?php echo $newsrecord['id'] ?>"><?php echo $newsrecord['headline'] ?></a></td>
-                            <td><?php echo $newsrecord['createddate'] ?></td>
+                            <td><?php echo date('d-m-Y',strtotime($newsrecord['createddate']));?></td>
                         </tr>
                 <?php } ?>
                 </tbody>

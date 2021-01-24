@@ -4,25 +4,17 @@ class NewsCrud
     // Insert user data 
     public function UserRegister($post)
     {
-        $username=$_POST['username'];
-        $useremail=$_POST['useremail'];
-        $userpassword=$_POST['userpassword'];
-        if($username!='' && $useremail!='' && $userpassword!='')
-        {
-            
+        
             $pdo = new PDO('mysql:host=localhost;dbname=news_db', 'root','password');
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             $sql = "INSERT INTO user (username, useremail, userpassword,userrole) VALUES (?,?,?,?)";
             $statement= $pdo->prepare($sql);
-            $result=$statement->execute([$username, $useremail, $userpassword,1]);
+            $result=$statement->execute([$_POST['username'], $_POST['useremail'], $_POST['userpassword'],1]);
             if ($result==true) {
                 header("Location:Login.php");
             }else{
-                echo "Registration failed try again!";
+                return  false;
             }
-        }else{
-            echo "Please fill in the details";
-        }
         
     }
 

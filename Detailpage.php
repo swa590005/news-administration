@@ -1,4 +1,7 @@
 <?php
+ob_start();
+require __DIR__.'/config.php';
+Session::checkSession();
 include('header.php');
 include('footer.php');
 
@@ -30,7 +33,7 @@ if(isset($_GET['editId'])){
                     <td><?php echo $newsrecords['id'] ?></td>
                     <td><?php echo $newsrecords['headline'] ?></td>
                     <td><?php echo $newsrecords['content'] ?></td>
-                    <td><?php echo $newsrecords['createddate'] ?></td>
+                    <td><?php echo date('d-m-Y',strtotime($newsrecords['createddate'])); ?></td>
                     </tr>
             
             </tbody>
