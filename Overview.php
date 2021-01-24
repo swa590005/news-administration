@@ -1,4 +1,5 @@
 <?php
+require __DIR__.'/config.php';
 include('header.php');
 include('footer.php');
 

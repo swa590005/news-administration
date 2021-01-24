@@ -16,7 +16,7 @@ class NewsCrud
             $statement= $pdo->prepare($sql);
             $result=$statement->execute([$username, $useremail, $userpassword,1]);
             if ($result==true) {
-                header("Location:login.php");
+                header("Location:Login.php");
             }else{
                 echo "Registration failed try again!";
             }

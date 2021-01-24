@@ -1,6 +1,5 @@
 <?php
-require __DIR__.'/config.php';
-Session::init();
+//echo $login_url='http://'.$_SERVER['SERVER_NAME'].$_SERVER['PHP_SELF'];die;
 //Session::checkSession();
 //if(isset($_GET['action']) && $_GET['action']=="logout"){
     //Session::destroy();
@@ -13,40 +12,39 @@ Session::init();
            <meta name="viewport" content="width=device-width, initial-scale=1">
            <title>News Administration</title>
 
-           <!-- Bootstrap -->
+           <!-- Bootstrap 
            <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
             <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"/>
-            <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">
-           
+            <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">-->
+           <link rel="stylesheet" type=text/css href="css/bootstrap.css"/>
+           <link rel="stylesheet" type=text/css href="css/style.css"/>
     </head>
     <body>
-        <nav class="navbar navbar-expand-lg navbar-light bg-light">
-                <a class="navbar-brand" href="index.php">Navbar</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                        <span class="navbar-toggler-icon"></span>
-                </button>
-
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-            <ul class="navbar-nav mr-auto">
-                <li>
-                    <a class="nav-link" href="Register.php">Register <span class="sr-only">(current)</span></a>
-                </li>
-                <li>
-                    <a class="nav-link" href="Login.php">Login <span class="sr-only">(current)</span></a>
-                </li>
-                <li>
-                    <a class="nav-link" href="#">Logout <span class="sr-only">(current)</span></a>
-                </li>
-                 <li>
-                    <a class="nav-link" href="Overview.php">Dashboard <span class="sr-only">(current)</span></a>
-                </li>
-                <li>
-                    <a class="nav-link" href="Createnews.php">Create News <span class="sr-only">(current)</span></a>
-                </li>
-                
-                
-                
-      </li>
-            </ul>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+        <div class="col-lg-10">
+            <a class="navbar-brand" href="#" style="color:#fff;">News Administration</a>
         </div>
+        <div class="col-lg-2" style="margin-top:8px">
+            <div class="btn-group">
+            <a  href="#" class="btn btn-primary">Settings</a> 
+            <a  href="#" class="btn btn-primary dropdown-toggle" data-toggle="dropdown"
+            aria-expanded="false">
+            <span class="caret"></span>
+        </a> 
+        <ul class="dropdown-menu">
+        <?php $login_url='http://'.$_SERVER['SERVER_NAME'].$_SERVER['PHP_SELF'];?>
+            <?php if($login_url=='http://localhost/index.php'):?>
+                <li ><a href="login.php">Login</a></li>
+            <?php elseif(Session::get('userrole')=='0'):?>
+                <li ><a href="overview.php">Dashboard</a></li>
+                <li ><a href="createnews.php">Create News</a></li>
+                <li ><a href="logout.php">Logout</a></li>
+            <?php else:?>
+                <li ><a href="index.php">Register</a></li>
+            <?php endif;?>
+        </ul>
+            </div>
+        </div>
+  
     </nav>
+

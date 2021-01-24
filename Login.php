@@ -1,6 +1,7 @@
 <?php
-include('header.php');
-include('footer.php');
+
+require __DIR__.'/config.php';
+Session::init();
 
 $newsCrudObj=new NewsCrud();
 
@@ -17,37 +18,47 @@ if(isset($_POST['login'])){
                 Session::set('userid',$userrecord['id']);
                 Session::set('userrole',$userrecord['userrole']);
             }
-            header("Location:index.php");
+            header("Location:userDashboard.php");
         }else{
-            echo "<div class='alert alert-success alert-dismissible'>
-              <button type='button' class='close' data-dismiss='alert'>&times;</button>
-              wrong details
-            </div>";
+            $error="Useremail or Password incorrect ";
         }
         
     }else{
-        echo "<div class='alert alert-success alert-dismissible'>
-              <button type='button' class='close' data-dismiss='alert'>&times;</button>
-              Please fill details
-            </div>";
-        
+            $error="Please fill all details";
     }
 }
-
+include('header.php');
+include('footer.php');
 ?>
 
     <div class="container">
-        <form class="form-horizontal" action="/Login.php" method="POST">
-        
-        <div class="form-group">
-            <label for="exampleInputEmail1">Email address</label>
-            <input type="email" name="useremail" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
-        </div>
-        <div class="form-group">
-            <label for="exampleInputPassword1">Password</label>
-            <input type="password" name="userpassword" class="form-control" id="exampleInputPassword1" placeholder="Password">
-        </div>
-        
-        <button type="submit" name="login" class="btn btn-primary">Login</button>
-        </form>
+    <form class="form-horizontal" action="Login.php" method="POST">
+        <fieldset>
+            <div class="register-user p-0 col-md-6">
+                Login
+            </div>
+            <div class="row">
+                <div class="col-12 col-md-6">
+                <div class="form-group">
+                        <label for="useremail" class="col-lg-2 col-form-label">Useremail</label>
+                        <div class="col-lg-10">
+                            <input type="email" name="useremail" placeholder="Email" class="form-control" >
+                        </div>
+                        <label for="userpassword" class="col-lg-2 col-form-label">Password</label>
+                        <div class="col-lg-10">
+                            <input type="password" name="userpassword" placeholder="Password" class="form-control" >
+                        </div>
+                        <div class="col-lg-10 pt-3">
+                        <button type="submit" name="login" class="btn btn-primary">Login</button>
+                        </div>
+                        <div class="col-lg-10 pt-3">
+                            <div class="alert alert-dismissable alert-warning">
+                                <p><?php echo $error; ?></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+    </form>
     </div>
