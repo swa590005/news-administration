@@ -1,7 +1,7 @@
 <?php
 
 require __DIR__.'/config.php';
-
+Session::checkSession();
 include('header.php');
 include('footer.php');
 

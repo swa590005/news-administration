@@ -12,6 +12,7 @@ if(isset($_POST['login'])){
     {   
         $response=$newsCrudObj->UserLogin($_POST);
         if($response){
+            
             Session::set('login',true);
             foreach ($response as $userrecord) {
                 Session::set('useremail',$userrecord['useremail']);

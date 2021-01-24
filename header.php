@@ -1,4 +1,5 @@
 <?php
+
 //echo $login_url='http://'.$_SERVER['SERVER_NAME'].$_SERVER['PHP_SELF'];die;
 //Session::checkSession();
 //if(isset($_GET['action']) && $_GET['action']=="logout"){
@@ -35,9 +36,12 @@
         <?php $login_url='http://'.$_SERVER['SERVER_NAME'].$_SERVER['PHP_SELF'];?>
             <?php if($login_url=='http://localhost/index.php'):?>
                 <li ><a href="login.php">Login</a></li>
-            <?php elseif(Session::get('userrole')=='0'):?>
+                   
+            <?php elseif(Session::get('userrole')==0):?>
                 <li ><a href="overview.php">Dashboard</a></li>
                 <li ><a href="createnews.php">Create News</a></li>
+                <li ><a href="logout.php">Logout</a></li>
+            <?php elseif(Session::get('userrole')==1):?>
                 <li ><a href="logout.php">Logout</a></li>
             <?php else:?>
                 <li ><a href="index.php">Register</a></li>
