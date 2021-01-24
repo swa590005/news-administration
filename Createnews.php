@@ -6,6 +6,12 @@ $newsCrudObj = new NewsCrud();
 
   // Insert Record 
   if(isset($_POST['createNews'])) {
+    
+    if (isset($_POST['activeflag']) && ($_POST['activeflag'] == "1")) {
+        $_POST['activeflag']=1;
+       } else {
+        $_POST['activeflag']=0;
+       }
     $newsCrudObj->insertData($_POST);
   }
   if(isset($_GET['editId']) && !empty($_GET['editId'])) {
@@ -15,7 +21,11 @@ $newsCrudObj = new NewsCrud();
   }
   // Update Record 
   if(isset($_POST['updateNews'])) {
-    $_POST['activeflag']=1;
+    if (isset($_POST['activeflag']) && ($_POST['activeflag'] == "1")) {
+        $_POST['activeflag']=1;
+       } else {
+        $_POST['activeflag']=0;
+       }
     $newsCrudObj->updateRecord($_POST);
   } 
 
@@ -70,8 +80,18 @@ $newsCrudObj = new NewsCrud();
         </div>
         
         <div class="form-check">
-            <input type="checkbox" class="form-check-input" id="exampleCheck1">
-            <label class="form-check-label" name="activeflag" value=1 for="exampleCheck1">Make News Active</label>
+            <?php 
+                if($newsrecords['activeflag']==1)
+                {
+            ?>
+                  <input type="checkbox" class="form-check-input" checked=true name="activeflag" value="1">
+            <?php
+                }else{
+            ?>     
+                  <input type="checkbox" class="form-check-input" name="activeflag" value="1">
+            <?php } ?>
+            
+            <label class="form-check-label"  for="exampleCheck1">Make News Active</label>
         </div>
         
 

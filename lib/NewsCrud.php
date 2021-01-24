@@ -12,9 +12,9 @@ class NewsCrud
             
             $pdo = new PDO('mysql:host=localhost;dbname=news_db', 'root','password');
             $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $sql = "INSERT INTO users (username, useremail, userpassword) VALUES (?,?,?)";
+            $sql = "INSERT INTO user (username, useremail, userpassword,userrole) VALUES (?,?,?,?)";
             $statement= $pdo->prepare($sql);
-            $result=$statement->execute([$username, $useremail, $userpassword]);
+            $result=$statement->execute([$username, $useremail, $userpassword,1]);
             if ($result==true) {
                 header("Location:login.php");
             }else{
@@ -45,9 +45,10 @@ class NewsCrud
         
         $pdo = new PDO('mysql:host=localhost;dbname=news_db', 'root','password');
         $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+
         $sql = "INSERT INTO news_properties (headline, content, activeflag) VALUES (?,?,?)";
         $statement= $pdo->prepare($sql);
-        $result=$statement->execute([$_POST['headline'], $_POST['content'],1 ]);
+        $result=$statement->execute([$_POST['headline'], $_POST['content'],$_POST['activeflag'] ]);
         if ($result==true) {
             header("Location:Overview.php?msg1=insert");
         }else{

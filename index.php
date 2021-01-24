@@ -6,7 +6,7 @@ if(isset($_GET['action']) && $_GET['action']=="logout"){
     Session::destroy();
 }
 $newsCrudObj = new NewsCrud();
-echo $_SERVER['REQUEST_URI'];
+
 ?>
 <html>
     <head>
@@ -49,6 +49,7 @@ echo $_SERVER['REQUEST_URI'];
             </ul>
         </div>
     </nav>
+    <div id="results" >
         <div class="container">
         <div class="page-header">
                 <h1>News Details</h1>
@@ -67,15 +68,15 @@ echo $_SERVER['REQUEST_URI'];
                     $newsrecords = $newsCrudObj->displayData(); 
                     foreach ($newsrecords as $newsrecord) {
                     ?>
-                        <input type="hidden" name="newsId" value="<?php echo $newsrecord['id']; ?>">
                         <tr>
                             <td><?php echo $newsrecord['id'] ?></td>
-                            <td><a href="#"><?php echo $newsrecord['headline'] ?></a></td>
+                            <td><a href="Detailpage.php?editId=<?php echo $newsrecord['id'] ?>"><?php echo $newsrecord['headline'] ?></a></td>
                             <td><?php echo $newsrecord['createddate'] ?></td>
                         </tr>
                 <?php } ?>
                 </tbody>
             </table>
+        </div>
         </div>
     </body>
 </html>
