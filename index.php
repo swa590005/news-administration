@@ -4,7 +4,7 @@ ob_start();
 include('header.php');
 include('footer.php');
 
-$newsCrudObj = new NewsCrud();
+$userObj = new User();
 
 if(isset($_POST['register'])){
     $username=$_POST['username'];

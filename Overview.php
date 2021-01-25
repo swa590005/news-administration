@@ -8,7 +8,12 @@ if(Session::get('userrole')==1){
 include('header.php');
 include('footer.php');
 
-$newsCrudObj = new NewsCrud();
+$newsLoader= new NewsLoader();
+$newLists= $newsLoader->getNews();
+//echo '<pre>',var_dump($newLists),'</pre>';die;
+
+//var_dump($newLists);die;
+
 // Delete record from table
 if(isset($_GET['deleteId']) && !empty($_GET['deleteId'])) {
     $deleteId = $_GET['deleteId'];
@@ -51,16 +56,17 @@ if(isset($_GET['deleteId']) && !empty($_GET['deleteId'])) {
     </thead>
     <tbody>
         <?php 
-          $newsrecords = $newsCrudObj->displayData(); 
-          foreach ($newsrecords as $newsrecord) {
+          //$newsrecords = $newsCrudObj->displayData();
+          $i=1; 
+          foreach ($newLists as $newsrecord) {
         ?>
             <tr>
-            <td><?php echo $newsrecord['id'] ?></td>
-            <td><?php echo $newsrecord['headline'] ?></td>
-            <td><?php echo $newsrecord['content'] ?></td>
-            <td><?php echo date('d-m-Y',strtotime($newsrecord['createddate'])); ?></td>
+            <td><?php echo $i++ ?></td>
+            <td><?php echo $newsrecord->getNewsHeadline(); ?></td>
+            <td><?php echo $newsrecord->getNewsContent(); ?></td>
+            <td><?php echo $newsrecord->getNewsDatetime(); ?></td>
               <?php 
-                if($newsrecord['activeflag']==1)
+                if($newsrecord->getActiveFlag())
                 {
               ?>
                   <td>active</td>
@@ -71,12 +77,12 @@ if(isset($_GET['deleteId']) && !empty($_GET['deleteId'])) {
             <?php } ?>
             <td>
                 <button>
-                  <a href="Createnews.php?editId=<?php echo $newsrecord['id'] ?>" style="color:green">
+                  <a href="Createnews.php?editId=<?php echo $newsrecord->getId(); ?>" style="color:green">
                     Edit
                   </a>
                 </button>
                 <button>
-                  <a href="Overview.php?deleteId=<?php echo $newsrecord['id'] ?>" style="color:red" onclick="confirm('Are you sure want to delete this record')">  
+                  <a href="Overview.php?deleteId=<?php echo $newsrecord->getId(); ?>" style="color:red" onclick="confirm('Are you sure want to delete this record')">  
                     Delete
                   </a>
                 </button>

@@ -3,7 +3,7 @@ ob_start();
 require __DIR__.'/config.php';
 Session::init();
 
-$newsCrudObj=new NewsCrud();
+$userObj=new User();
 
 if(isset($_POST['login'])){
     $useremail=$_POST['useremail'];
