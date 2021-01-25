@@ -9,7 +9,7 @@ include('header.php');
 include('footer.php');
 
 $update = false;
-$newsCrudObj = new NewsCrud();
+$newsLoader = new NewsLoader();
 
   // Insert Record 
   if(isset($_POST['createNews'])) {
@@ -21,11 +21,17 @@ $newsCrudObj = new NewsCrud();
        }
     $newsCrudObj->insertData($_POST);
   }
+
+  //editing this
+
   if(isset($_GET['editId']) && !empty($_GET['editId'])) {
         $editId = $_GET['editId'];
         $update = true;
-        $newsrecords = $newsCrudObj->displyaRecordById($editId);
+        $newsrecords = $newsLoader->findOneById($editId);
   }
+
+
+
   // Update Record 
   if(isset($_POST['updateNews'])) {
     if (isset($_POST['activeflag']) && ($_POST['activeflag'] == "1")) {
@@ -47,18 +53,18 @@ $newsCrudObj = new NewsCrud();
         <form class="form-horizontal" action="Createnews.php" method="POST">
         <div class="form-group">
             <label for="headline">Headline</label>
-            <input value="<?php echo $newsrecords['headline']; ?>" type="text" name="headline" class="form-control" placeholder="Enter headline">
+            <input value="<?php echo $newsrecords->getNewsHeadline(); ?>" type="text" name="headline" class="form-control" placeholder="Enter headline">
         </div>
         <div class="form-group">
             <label for="content">content</label>
             <textarea type="text" name="content" class="form-control" placeholder="Enter content">
-                <?php echo $newsrecords['content']; ?>    
+                <?php echo $newsrecords->getNewsContent(); ?>    
             </textarea>
         </div>
         
         <div class="form-check">
             <?php 
-                if($newsrecords['activeflag']==1)
+                if($newsrecords->getActiveFlag())
                 {
             ?>
                   <input type="checkbox" class="form-check-input" checked=true name="activeflag" value="1">
@@ -74,7 +80,7 @@ $newsCrudObj = new NewsCrud();
 
         <?php if ($update == true): ?>
             
-            <input type="hidden" name="newsId" value="<?php echo $newsrecords['id']; ?>">
+            <input type="hidden" name="newsId" value="<?php echo $newsrecords->getId(); ?>">
 	        <button type="submit" name="updateNews" class="btn btn-primary">Update News</button>
         <?php else: ?>
 	        <button type="submit" name="createNews" class="btn btn-primary">Create News</button>

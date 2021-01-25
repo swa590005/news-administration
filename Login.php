@@ -3,7 +3,8 @@ ob_start();
 require __DIR__.'/config.php';
 Session::init();
 
-$userObj=new User();
+$container= new Container($configuration);
+$userObj=$container->getNewsLoader();
 
 if(isset($_POST['login'])){
     $useremail=$_POST['useremail'];
@@ -11,7 +12,7 @@ if(isset($_POST['login'])){
     if($useremail!='' && $userpassword!='')
     {   
         $_POST['userpassword']=sha1($userpassword);
-        $response=$newsCrudObj->UserLogin($_POST);
+        $response=$userObj->UserLogin($_POST);
         if($response){
             
             Session::set('login',true);

@@ -8,7 +8,10 @@ if(Session::get('userrole')==1){
 include('header.php');
 include('footer.php');
 
-$newsLoader= new NewsLoader();
+$container= new Container($configuration);
+$newsLoader=$container->getNewsLoader();
+
+
 $newLists= $newsLoader->getNews();
 //echo '<pre>',var_dump($newLists),'</pre>';die;
 

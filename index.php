@@ -4,7 +4,8 @@ ob_start();
 include('header.php');
 include('footer.php');
 
-$userObj = new User();
+$container= new Container($configuration);
+$userObj=$container->getNewsLoader();
 
 if(isset($_POST['register'])){
     $username=$_POST['username'];
@@ -13,7 +14,7 @@ if(isset($_POST['register'])){
         if ($username!='' && $useremail!='' && $userpassword!='') {
 
             $_POST['userpassword']=sha1($userpassword);
-            $response=$newsCrudObj->UserRegister($_POST);
+            $response=$userObj->UserRegister($_POST);
             if(!$response){
                 $error="Could not Register User";
             }
