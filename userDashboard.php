@@ -7,14 +7,16 @@ include('footer.php');
 
 
 
-$newsCrudObj = new NewsCrud();
-
+$container= new Container($configuration);
+$newsLoader=$container->getNewsLoader();
+$newLists= $newsLoader->getNews();
+$i=1;
 ?>
 
     <div id="results" >
         <div class="container">
         <div class="page-header">
-                <h1>News Details</h1>
+                <h1>News</h1>
             </div>
             <table class="table table-hover">
                 <thead>
@@ -25,16 +27,16 @@ $newsCrudObj = new NewsCrud();
                     </tr>
                 </thead>
                 <tbody>
-                <?php 
-                    $newsrecords = $newsCrudObj->displayData(); 
-                    foreach ($newsrecords as $newsrecord) {
-                    ?>
+                <?php foreach ($newLists as $newsrecord): ?>
+                    <?php if($newsrecord->getActiveFlag()) : ?>
+                
                         <tr>
-                            <td><?php echo $newsrecord['id'] ?></td>
-                            <td><a href="Detailpage.php?editId=<?php echo $newsrecord['id'] ?>"><?php echo $newsrecord['headline'] ?></a></td>
-                            <td><?php echo date('d-m-Y',strtotime($newsrecord['createddate']));?></td>
+                            <td><?php echo $i++ ?></td>
+                            <td><a href="Detailpage.php?editId=<?php echo $newsrecord->getId(); ?>"><?php echo $newsrecord->getNewsHeadline(); ?></a></td>
+                            <td><?php echo $newsrecord->getNewsDatetime();?></td>
                         </tr>
-                <?php } ?>
+                        <?php endif ;?>
+                            <?php endforeach; ?>
                 </tbody>
             </table>
         </div>

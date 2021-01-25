@@ -13,7 +13,13 @@ class NewsLoader
         return $this->pdo;
     }
 
-    // Insert user data 
+    // Insert user data     
+    /**
+     * UserRegister
+     *
+     * @param  mixed $post
+     * @return void
+     */
     public function UserRegister($post)
     {
         
@@ -69,7 +75,8 @@ class NewsLoader
         $newslist = array();
         return $newslist = $this->createNewsFromData($newsArray);
     }
-    //returns object
+    //returns object    
+    
     private function createNewsFromData(array $newsData)
     {
         $news= new News($newsData['headline'],$newsData['content']);
@@ -88,10 +95,6 @@ class NewsLoader
 
         return $newsArray;
     }
-    
-    
-
-
 }
 
 

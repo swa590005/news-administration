@@ -1,6 +1,7 @@
 <?php
 require __DIR__.'/config.php';
 ob_start();
+
 include('header.php');
 include('footer.php');
 

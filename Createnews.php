@@ -9,7 +9,8 @@ include('header.php');
 include('footer.php');
 
 $update = false;
-$newsLoader = new NewsLoader();
+$container= new Container($configuration);
+$newsLoader=$container->getNewsLoader();
 
   // Insert Record 
   if(isset($_POST['createNews'])) {

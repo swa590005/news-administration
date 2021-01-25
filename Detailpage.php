@@ -5,12 +5,13 @@ Session::checkSession();
 include('header.php');
 include('footer.php');
 
-$newsCrudObj = new NewsCrud();
+$container= new Container($configuration);
+$newsLoader=$container->getNewsLoader();
 
 if(isset($_GET['editId'])){
     $id=$_GET['editId'];
-    
-    $newsrecords = $newsCrudObj->displyaRecordById($id); 
+    $i=1;
+    $newsrecords = $newsLoader->findOneById($id);
 }
 
 ?> 
@@ -21,7 +22,7 @@ if(isset($_GET['editId'])){
         <table class="table table-hover">
             <thead>
             <tr>
-                <th>Id</th>
+                <th>SI.No</th>
                 <th>Headline</th>
                 <th>Content</th>
                 <th>Created Date</th>
@@ -30,13 +31,14 @@ if(isset($_GET['editId'])){
             <tbody>
                 
                     <tr>
-                    <td><?php echo $newsrecords['id'] ?></td>
-                    <td><?php echo $newsrecords['headline'] ?></td>
-                    <td><?php echo $newsrecords['content'] ?></td>
-                    <td><?php echo date('d-m-Y',strtotime($newsrecords['createddate'])); ?></td>
+                    <td><?php echo $i ?></td>
+                    <td><?php echo $newsrecords->getNewsHeadline(); ?></td>
+                    <td><?php echo $newsrecords->getNewsContent(); ?></td>
+                    <td><?php echo $newsrecords->getNewsDatetime(); ?></td>
                     </tr>
             
             </tbody>
         </table>
     </div>
+    <a href="userDashboard.php"><p class="text-center"><i class="fa fa-undo"></i> Back to News</p></a>
     

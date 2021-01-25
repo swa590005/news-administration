@@ -49,7 +49,7 @@ if(isset($_GET['deleteId']) && !empty($_GET['deleteId'])) {
   <table class="table table-hover">
     <thead>
       <tr>
-        <th>Id</th>
+        <th>SI.No</th>
         <th>Headline</th>
         <th>Content</th>
         <th>Created Date</th>
@@ -95,4 +95,5 @@ if(isset($_GET['deleteId']) && !empty($_GET['deleteId'])) {
     </tbody>
   </table>
   <a href="Createnews.php" class="btn btn-primary">Add New Record</a>
+  <a href="userDashboard.php"><p class="text-center"><i class="fa fa-undo"></i> Back to News</p></a>
 </div>

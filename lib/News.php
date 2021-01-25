@@ -45,8 +45,9 @@ class News
     {
         return $this->id;
     }
-
-    public function setId($id)
+    
+    
+    public function setId(int $id)
     {
         $this->id = $id;
     }
