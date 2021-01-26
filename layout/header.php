@@ -31,10 +31,10 @@ Session::checkSession();
         <ul class="dropdown-menu p-3">
         <?php $login_url='http://'.$_SERVER['SERVER_NAME'].$_SERVER['PHP_SELF'];?>
             <?php if($login_url=='http://localhost/index.php'):?>
-                <li ><a href="../views/Login.php">Login</a></li>
+                <li ><a href="../views/login.php">Login</a></li>
             <?php elseif(Session::get('userrole')==1):?>
-                <li ><a href="../views/overview.php">Dashboard</a></li>
-                <li ><a href="../views/createnews.php">Create News</a></li>
+                <li ><a href="../views/adminDashboard.php">Dashboard</a></li>
+                <li ><a href="../views/createNews.php">Create News</a></li>
                 <li ><a href="../views/logout.php">Logout</a></li>
             <?php elseif((Session::get('userrole')==0) && (isset($_SESSION['userid']))):?>
                 <li ><a href="../views/logout.php">Logout</a></li>

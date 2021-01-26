@@ -15,7 +15,7 @@ $newsLoader=$container->getNewsLoader();
         }
         $result=$newsLoader->createNews($_POST);
         if ($result==true) {
-            header("Location:./Overview.php?msg1=insert");
+            header("Location:./adminDashboard.php?msg1=insert");
         }
     }else{
         $error="Please fill in Details";
@@ -36,14 +36,14 @@ $newsLoader=$container->getNewsLoader();
         
         $result=$newsLoader->editNews($_POST);
         if ($result==true) {
-            header("Location:./Overview.php?msg2=update");
+            header("Location:./adminDashboard.php?msg2=update");
         }
     }else{
         $error="Please fill in Details";
     }
   }
   if(isset($_POST['cancel'])){
-    header("Location:./Overview.php");
+    header("Location:./adminDashboard.php");
   } 
  
 ?>
@@ -56,7 +56,7 @@ $newsLoader=$container->getNewsLoader();
             ?>      <div class="container">
                         <h2 class="create-news-headline">Update News</h2>
                         
-                        <form class="form-horizontal" action="Createnews.php" method="POST">
+                        <form class="form-horizontal" action="createNews.php" method="POST">
                         <div class="form-group">
                             <label for="headline">Headline</label>
                             <input value="<?php echo $newsrecords->getNewsHeadline(); ?>" type="text" name="headline" class="form-control" placeholder="Enter headline">
@@ -97,7 +97,7 @@ $newsLoader=$container->getNewsLoader();
             ?>     
                     <div class="container">
                         <h2 class="create-news-headline">Create News</h2>
-                        <form class="form-horizontal" action="Createnews.php" method="POST">
+                        <form class="form-horizontal" action="createNews.php" method="POST">
                         <div class="form-group">
                             <label for="headline">Headline</label>
                             <input  type="text" name="headline" class="form-control" placeholder="Enter headline">

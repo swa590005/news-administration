@@ -16,7 +16,7 @@ if(isset($_POST['register'])){
             if(!$response){
                 $error="Could not Register User";
             }else{
-                header("Location:../views/Login.php");
+                header("Location:../views/login.php");
             }
         }else{
             $error="Please fill in the details";

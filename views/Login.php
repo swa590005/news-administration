@@ -38,7 +38,7 @@ if(isset($_POST['login'])){
 ?>
 <?php require '../layout/header.php'; ?>   
     <div class="container">
-    <form class="form-horizontal" action="Login.php" method="POST">
+    <form class="form-horizontal" action="login.php" method="POST">
         <fieldset>
             <div class="register-user p-0 col-md-6">
                 Login

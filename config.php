@@ -2,11 +2,11 @@
 //require __DIR__.'/vendor/autoload.php';
 
 
-require_once __DIR__.'/lib/Session.php';
-require_once __DIR__.'/lib/News.php';
-require_once __DIR__.'/lib/PdoNewsStorage.php';
-require_once __DIR__.'/lib/NewsLoader.php';
-require_once __DIR__.'/lib/Container.php';
+require_once __DIR__.'/lib/Model/Session.php';
+require_once __DIR__.'/lib/Model/News.php';
+require_once __DIR__.'/lib/Service/PdoNewsStorage.php';
+require_once __DIR__.'/lib/Service/NewsLoader.php';
+require_once __DIR__.'/lib/Service/Container.php';
 
 
 $configuration = array(
