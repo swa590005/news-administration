@@ -1,26 +1,22 @@
 <?php
 ob_start();
 require __DIR__.'/config.php';
-Session::checkSession();
-if(Session::get('userrole')==1){
-  Session::destroy();
-}
 include('header.php');
 include('footer.php');
 
 $container= new Container($configuration);
 $newsLoader=$container->getNewsLoader();
 
-
+//load news data
 $newLists= $newsLoader->getNews();
-//echo '<pre>',var_dump($newLists),'</pre>';die;
-
-//var_dump($newLists);die;
 
 // Delete record from table
 if(isset($_GET['deleteId']) && !empty($_GET['deleteId'])) {
     $deleteId = $_GET['deleteId'];
-    $newsCrudObj->deleteRecord($deleteId);
+    $result=$newsLoader->removeSingleNews($deleteId);
+       if ($result==true) {
+        header("Location:Overview.php?msg3=delete");
+       }
 }
 ?> 
 
@@ -59,7 +55,6 @@ if(isset($_GET['deleteId']) && !empty($_GET['deleteId'])) {
     </thead>
     <tbody>
         <?php 
-          //$newsrecords = $newsCrudObj->displayData();
           $i=1; 
           foreach ($newLists as $newsrecord) {
         ?>

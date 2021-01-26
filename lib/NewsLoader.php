@@ -2,61 +2,50 @@
 
 class NewsLoader
 {
-    private $pdo;
+    private $newsStorage;
 
-    public function __construct(PDO $pdo)
+    public function __construct(PdoNewsStorage $newsStorage)
     {
-        $this->pdo = $pdo;
+        $this->newsStorage = $newsStorage;
     }
-    private function getPDO()
-    {
-        return $this->pdo;
-    }
-
-    // Insert user data     
-    /**
-     * UserRegister
-     *
-     * @param  mixed $post
-     * @return void
-     */
-    public function UserRegister($post)
+    
+    public function createUser($post)
     {
         
-            $pdo=$this->getPDO();
-            $sql = "INSERT INTO user (username, useremail, userpassword,userrole) VALUES (?,?,?,?)";
-            $statement= $pdo->prepare($sql);
-            $result=$statement->execute([$_POST['username'], $_POST['useremail'], $_POST['userpassword'],1]);
-            if ($result==true) {
-                header("Location:Login.php");
-            }else{
-                return  false;
-            }
+        return $result = $this->newsStorage->insertUserData($post); 
         
     }
 
-    public function UserLogin($post)
+    public function getLoginUser($post)
     {
+        return $result = $this->newsStorage->fetchLoginUserData($post); 
         
-        $pdo=$this->getPDO();
-        $statement=$pdo->prepare('Select * from user where useremail = :useremail && userpassword=:userpassword');
-        $statement->execute(array('useremail' => $_POST['useremail'], 
-                                    'userpassword'=> $_POST['userpassword']));
-        $userArray = $statement->fetchAll(\PDO ::FETCH_ASSOC);
-
-        return $userArray;
     }
 
+    public function createNews($post)
+    {
+        
+        return $result = $this->newsStorage->insertNewsData($post); 
+        
+    }
 
-    /**
-     * Undocumented function
-     *
-     * @return news[]
-     */
+    public function editNews($post)
+    {
+        
+        return $result = $this->newsStorage->updateNewsData($post); 
+        
+    }
+    public function removeSingleNews($id)
+    {
+        
+        return $result = $this->newsStorage->deleteSingleNewsData($id); 
+        
+    }
+
     public function getNews()
     {       
         $newslist = array();
-            $newsDatas=$this->queryForNews();
+            $newsDatas=$this->newsStorage->fetchAllNewsData();
             foreach($newsDatas as $newsData)
             { 
                 $newslist[] =$this->createNewsFromData($newsData);
@@ -68,10 +57,7 @@ class NewsLoader
     public function findOneById($id)
     {
         
-        $pdo=$this->getPDO();
-        $statement=$pdo->prepare('Select * from news_properties where id = :id');
-        $statement->execute(array('id' => $id));
-        $newsArray = $statement->fetch(\PDO ::FETCH_ASSOC);//to return one row and prevent sql injection
+        $newsArray=$this->newsStorage->fetchSingleNewsData($id);
         $newslist = array();
         return $newslist = $this->createNewsFromData($newsArray);
     }
@@ -85,16 +71,7 @@ class NewsLoader
         $news->setActiveFlag($newsData['activeflag']);
         return $news;
     }
-    private function queryForNews()
-    {
-        
-        $pdo=$this->getPDO();
-        $statement=$pdo->prepare('Select * from news_properties');
-        $statement->execute();
-        $newsArray = $statement->fetchAll(\PDO ::FETCH_ASSOC);
-
-        return $newsArray;
-    }
+   
 }
 
 

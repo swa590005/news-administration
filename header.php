@@ -1,10 +1,5 @@
 <?php
-
-//echo $login_url='http://'.$_SERVER['SERVER_NAME'].$_SERVER['PHP_SELF'];die;
-//Session::checkSession();
-//if(isset($_GET['action']) && $_GET['action']=="logout"){
-    //Session::destroy();
-//}
+Session::checkSession();
 ?> 
 <html>
     <head>
@@ -13,10 +8,7 @@
            <meta name="viewport" content="width=device-width, initial-scale=1">
            <title>News Administration</title>
 
-           <!-- Bootstrap 
-           <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-            <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css"/>
-            <link href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet">-->
+           <!-- Bootstrap -->
            <link rel="stylesheet" type=text/css href="css/bootstrap.css"/>
            <link rel="stylesheet" type=text/css href="css/style.css"/>
     </head>
@@ -40,12 +32,11 @@
         <?php $login_url='http://'.$_SERVER['SERVER_NAME'].$_SERVER['PHP_SELF'];?>
             <?php if($login_url=='http://localhost/index.php'):?>
                 <li ><a href="login.php">Login</a></li>
-                   
-            <?php elseif(Session::get('userrole')==0):?>
+            <?php elseif(Session::get('userrole')==1):?>
                 <li ><a href="overview.php">Dashboard</a></li>
                 <li ><a href="createnews.php">Create News</a></li>
                 <li ><a href="logout.php">Logout</a></li>
-            <?php elseif(Session::get('userrole')==1):?>
+            <?php elseif((Session::get('userrole')==0) && (isset($_SESSION['userid']))):?>
                 <li ><a href="logout.php">Logout</a></li>
             <?php else:?>
                 <li ><a href="index.php">Register</a></li>

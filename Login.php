@@ -4,7 +4,7 @@ require __DIR__.'/config.php';
 Session::init();
 
 $container= new Container($configuration);
-$userObj=$container->getNewsLoader();
+$newsLoader=$container->getNewsLoader();
 
 if(isset($_POST['login'])){
     $useremail=$_POST['useremail'];
@@ -12,7 +12,7 @@ if(isset($_POST['login'])){
     if($useremail!='' && $userpassword!='')
     {   
         $_POST['userpassword']=sha1($userpassword);
-        $response=$userObj->UserLogin($_POST);
+        $response=$newsLoader->getLoginUser($_POST);
         if($response){
             
             Session::set('login',true);
@@ -29,6 +29,10 @@ if(isset($_POST['login'])){
     }else{
             $error="Please fill all details";
     }
+}else{
+    unset($_SESSION['userid']);
+    unset($_SESSION['useremail']);
+    unset($_SESSION['userrole']);
 }
 include('header.php');
 include('footer.php');

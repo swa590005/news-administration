@@ -13,11 +13,11 @@ class Session
 
     public static function get($key)
     {
-        if(isset($_SESSION[$key])){
-            return $_SESSION[$key];
-        }else{
-            return false;
-        }
+            if (isset($_SESSION[$key])) {
+                return $_SESSION[$key];
+            } else {
+                return false;
+            }
     }
 
     public static function checkSession()

@@ -5,6 +5,7 @@ class Container
     private $configuration;
     private $pdo;
     private $newsLoader;
+    private $newsStorage;
     public function __construct(array $configuration)
     {
         $this->configuration = $configuration;
@@ -33,9 +34,21 @@ class Container
     public function getNewsLoader(){
         if($this->newsLoader=== null)
         {
-            $this->newsLoader=new NewsLoader($this->getPDO());
+            $this->newsLoader=new NewsLoader($this->getNewsStorage());
         }
         return $this->newsLoader;
+    }
+    /**
+     * Undocumented function
+     *
+     * @return PdoNewsStorage
+     */
+    public function getNewsStorage(){
+        if($this->newsStorage=== null)
+        {
+            $this->newsStorage=new PdoNewsStorage($this->getPDO());
+        }
+        return $this->newsStorage;
     }
 
 }

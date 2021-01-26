@@ -9,6 +9,7 @@ include('footer.php');
 
 $container= new Container($configuration);
 $newsLoader=$container->getNewsLoader();
+//load news data
 $newLists= $newsLoader->getNews();
 $i=1;
 ?>
@@ -29,14 +30,13 @@ $i=1;
                 <tbody>
                 <?php foreach ($newLists as $newsrecord): ?>
                     <?php if($newsrecord->getActiveFlag()) : ?>
-                
                         <tr>
                             <td><?php echo $i++ ?></td>
                             <td><a href="Detailpage.php?editId=<?php echo $newsrecord->getId(); ?>"><?php echo $newsrecord->getNewsHeadline(); ?></a></td>
                             <td><?php echo $newsrecord->getNewsDatetime();?></td>
                         </tr>
-                        <?php endif ;?>
-                            <?php endforeach; ?>
+                    <?php endif ;?>
+                <?php endforeach; ?>
                 </tbody>
             </table>
         </div>

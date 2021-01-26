@@ -6,7 +6,7 @@ include('header.php');
 include('footer.php');
 
 $container= new Container($configuration);
-$userObj=$container->getNewsLoader();
+$newsLoader=$container->getNewsLoader();
 
 if(isset($_POST['register'])){
     $username=$_POST['username'];
@@ -15,9 +15,11 @@ if(isset($_POST['register'])){
         if ($username!='' && $useremail!='' && $userpassword!='') {
 
             $_POST['userpassword']=sha1($userpassword);
-            $response=$userObj->UserRegister($_POST);
+            $response=$newsLoader->createUser($_POST);
             if(!$response){
                 $error="Could not Register User";
+            }else{
+                header("Location:Login.php");
             }
         }else{
             $error="Please fill in the details";

@@ -4,6 +4,7 @@
 
 require_once __DIR__.'/lib/Session.php';
 require_once __DIR__.'/lib/News.php';
+require_once __DIR__.'/lib/PdoNewsStorage.php';
 require_once __DIR__.'/lib/NewsLoader.php';
 require_once __DIR__.'/lib/NewsCrud.php';
 require_once __DIR__.'/lib/Container.php';
