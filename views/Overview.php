@@ -1,8 +1,6 @@
 <?php
 ob_start();
-require __DIR__.'/config.php';
-include('header.php');
-include('footer.php');
+require __DIR__.'/../config.php';
 
 $container= new Container($configuration);
 $newsLoader=$container->getNewsLoader();
@@ -15,11 +13,11 @@ if(isset($_GET['deleteId']) && !empty($_GET['deleteId'])) {
     $deleteId = $_GET['deleteId'];
     $result=$newsLoader->removeSingleNews($deleteId);
        if ($result==true) {
-        header("Location:Overview.php?msg3=delete");
+        header("Location:./Overview.php?msg3=delete");
        }
 }
 ?> 
-
+<?php require '../layout/header.php'; ?>   
 <div class="container">
   <?php
     if (isset($_GET['msg1']) == "insert") {
@@ -75,12 +73,12 @@ if(isset($_GET['deleteId']) && !empty($_GET['deleteId'])) {
             <?php } ?>
             <td>
                 <button>
-                  <a href="Createnews.php?editId=<?php echo $newsrecord->getId(); ?>" style="color:green">
+                  <a href="./Createnews.php?editId=<?php echo $newsrecord->getId(); ?>" style="color:green">
                     Edit
                   </a>
                 </button>
                 <button>
-                  <a href="Overview.php?deleteId=<?php echo $newsrecord->getId(); ?>" style="color:red" onclick="confirm('Are you sure want to delete this record')">  
+                  <a href="./Overview.php?deleteId=<?php echo $newsrecord->getId(); ?>" style="color:red" onclick="confirm('Are you sure want to delete this record')">  
                     Delete
                   </a>
                 </button>
@@ -89,6 +87,7 @@ if(isset($_GET['deleteId']) && !empty($_GET['deleteId'])) {
         <?php } ?>
     </tbody>
   </table>
-  <a href="Createnews.php" class="btn btn-primary">Add New Record</a>
-  <a href="userDashboard.php"><p class="text-center"><i class="fa fa-undo"></i> Back to News</p></a>
+  <a href="./Createnews.php" class="btn btn-primary">Add New Record</a>
+  <a href="./userDashboard.php"><p class="text-center"><i class="fa fa-undo"></i> Back to News</p></a>
 </div>
+<?php require '../layout/footer.php'; ?>   

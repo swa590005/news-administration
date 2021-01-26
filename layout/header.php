@@ -9,8 +9,8 @@ Session::checkSession();
            <title>News Administration</title>
 
            <!-- Bootstrap -->
-           <link rel="stylesheet" type=text/css href="css/bootstrap.css"/>
-           <link rel="stylesheet" type=text/css href="css/style.css"/>
+           <link rel="stylesheet" type=text/css href="../css/bootstrap.css"/>
+           <link rel="stylesheet" type=text/css href="../css/style.css"/>
     </head>
     <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
@@ -31,15 +31,15 @@ Session::checkSession();
         <ul class="dropdown-menu p-3">
         <?php $login_url='http://'.$_SERVER['SERVER_NAME'].$_SERVER['PHP_SELF'];?>
             <?php if($login_url=='http://localhost/index.php'):?>
-                <li ><a href="login.php">Login</a></li>
+                <li ><a href="../views/Login.php">Login</a></li>
             <?php elseif(Session::get('userrole')==1):?>
-                <li ><a href="overview.php">Dashboard</a></li>
-                <li ><a href="createnews.php">Create News</a></li>
-                <li ><a href="logout.php">Logout</a></li>
+                <li ><a href="../views/overview.php">Dashboard</a></li>
+                <li ><a href="../views/createnews.php">Create News</a></li>
+                <li ><a href="../views/logout.php">Logout</a></li>
             <?php elseif((Session::get('userrole')==0) && (isset($_SESSION['userid']))):?>
-                <li ><a href="logout.php">Logout</a></li>
+                <li ><a href="../views/logout.php">Logout</a></li>
             <?php else:?>
-                <li ><a href="index.php">Register</a></li>
+                <li ><a href="../index.php">Register</a></li>
             <?php endif;?>
         </ul>
             </div>

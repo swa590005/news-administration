@@ -2,9 +2,6 @@
 require __DIR__.'/config.php';
 ob_start();
 
-include('header.php');
-include('footer.php');
-
 $container= new Container($configuration);
 $newsLoader=$container->getNewsLoader();
 
@@ -19,7 +16,7 @@ if(isset($_POST['register'])){
             if(!$response){
                 $error="Could not Register User";
             }else{
-                header("Location:Login.php");
+                header("Location:../views/Login.php");
             }
         }else{
             $error="Please fill in the details";
@@ -27,7 +24,7 @@ if(isset($_POST['register'])){
 }
 
 ?>
-
+<?php require 'layout/header.php'; ?> 
     <div class="container">
 
     <form class="form-horizontal" action="index.php" method="POST">
@@ -67,3 +64,4 @@ if(isset($_POST['register'])){
         </fieldset>
     </form>
     </div>
+<?php require 'layout/footer.php'; ?> 

@@ -1,9 +1,7 @@
 <?php
 ob_start();
-require __DIR__.'/config.php';
+require __DIR__.'/../config.php';
 Session::checkSession();
-include('header.php');
-include('footer.php');
 
 $container= new Container($configuration);
 $newsLoader=$container->getNewsLoader();
@@ -15,7 +13,7 @@ if(isset($_GET['editId'])){
 }
 
 ?> 
-
+<?php require '../layout/header.php'; ?>   
     <div class="container">
         
         <h2>Details</h2>
@@ -40,5 +38,5 @@ if(isset($_GET['editId'])){
             </tbody>
         </table>
     </div>
-    <a href="userDashboard.php"><p class="text-center"><i class="fa fa-undo"></i> Back to News</p></a>
-    
+    <a href="./userDashboard.php"><p class="text-center"><i class="fa fa-undo"></i> Back to News</p></a>
+<?php require '../layout/footer.php'; ?>      

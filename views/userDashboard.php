@@ -1,11 +1,7 @@
 <?php
 ob_start();
-require __DIR__.'/config.php';
+require __DIR__.'/../config.php';
 Session::checkSession();
-include('header.php');
-include('footer.php');
-
-
 
 $container= new Container($configuration);
 $newsLoader=$container->getNewsLoader();
@@ -13,7 +9,7 @@ $newsLoader=$container->getNewsLoader();
 $newLists= $newsLoader->getNews();
 $i=1;
 ?>
-
+<?php require '../layout/header.php'; ?>   
     <div id="results" >
         <div class="container">
         <div class="page-header">
@@ -32,7 +28,7 @@ $i=1;
                     <?php if($newsrecord->getActiveFlag()) : ?>
                         <tr>
                             <td><?php echo $i++ ?></td>
-                            <td><a href="Detailpage.php?editId=<?php echo $newsrecord->getId(); ?>"><?php echo $newsrecord->getNewsHeadline(); ?></a></td>
+                            <td><a href="./Detailpage.php?editId=<?php echo $newsrecord->getId(); ?>"><?php echo $newsrecord->getNewsHeadline(); ?></a></td>
                             <td><?php echo $newsrecord->getNewsDatetime();?></td>
                         </tr>
                     <?php endif ;?>
@@ -41,4 +37,4 @@ $i=1;
             </table>
         </div>
     </div>
-
+<?php require '../layout/footer.php'; ?>   

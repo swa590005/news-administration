@@ -1,9 +1,6 @@
 <?php
 ob_start();
-require __DIR__.'/config.php';
-include('header.php');
-include('footer.php');
-
+require __DIR__.'/../config.php';
 
 $container= new Container($configuration);
 $newsLoader=$container->getNewsLoader();
@@ -18,7 +15,7 @@ $newsLoader=$container->getNewsLoader();
         }
         $result=$newsLoader->createNews($_POST);
         if ($result==true) {
-            header("Location:Overview.php?msg1=insert");
+            header("Location:./Overview.php?msg1=insert");
         }
     }else{
         $error="Please fill in Details";
@@ -39,15 +36,18 @@ $newsLoader=$container->getNewsLoader();
         
         $result=$newsLoader->editNews($_POST);
         if ($result==true) {
-            header("Location:Overview.php?msg2=update");
+            header("Location:./Overview.php?msg2=update");
         }
     }else{
         $error="Please fill in Details";
     }
+  }
+  if(isset($_POST['cancel'])){
+    header("Location:./Overview.php");
   } 
-
+ 
 ?>
-    
+<?php require '../layout/header.php'; ?>   
             <?php 
                 if(isset($_GET['editId']) && !empty($_GET['editId'])) 
                 {
@@ -82,6 +82,7 @@ $newsLoader=$container->getNewsLoader();
                         </div>
                             <input type="hidden" name="newsId" value="<?php echo $newsrecords->getId(); ?>">
                             <button type="submit" name="updateNews" class="btn btn-primary">Update News</button>
+                            <button type="submit" name="cancel" class="btn btn-primary">Cancel</button>
                         </form>
                         <div class="col-lg-10 pt-3">
                         <?php if(isset($_POST['updateNews'])):?>
@@ -111,7 +112,7 @@ $newsLoader=$container->getNewsLoader();
                             <label class="form-check-label"  for="activeflag">Make News Active</label>
                         </div>
                             <button type="submit" name="createNews" class="btn btn-primary">Create News</button>
-                    
+                            <button type="submit" name="cancel" class="btn btn-primary">Cancel</button>
                         </form>
                         <div class="col-lg-10 pt-3">
                         <?php if(isset($_POST['createNews'])):?>
@@ -122,6 +123,7 @@ $newsLoader=$container->getNewsLoader();
                         </div>
                     </div>
             <?php } ?>
+<?php require '../layout/footer.php'; ?>
             
        
     

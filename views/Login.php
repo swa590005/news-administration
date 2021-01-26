@@ -1,6 +1,6 @@
 <?php
 ob_start();
-require __DIR__.'/config.php';
+require __DIR__.'/../config.php';
 Session::init();
 
 $container= new Container($configuration);
@@ -21,7 +21,7 @@ if(isset($_POST['login'])){
                 Session::set('userid',$userrecord['id']);
                 Session::set('userrole',$userrecord['userrole']);
             }
-            header("Location:userDashboard.php");
+            header("Location:./userDashboard.php");
         }else{
             $error="Useremail or Password incorrect ";
         }
@@ -34,10 +34,9 @@ if(isset($_POST['login'])){
     unset($_SESSION['useremail']);
     unset($_SESSION['userrole']);
 }
-include('header.php');
-include('footer.php');
-?>
 
+?>
+<?php require '../layout/header.php'; ?>   
     <div class="container">
     <form class="form-horizontal" action="Login.php" method="POST">
         <fieldset>
@@ -71,3 +70,4 @@ include('footer.php');
         </fieldset>
     </form>
     </div>
+<?php require '../layout/footer.php'; ?>   

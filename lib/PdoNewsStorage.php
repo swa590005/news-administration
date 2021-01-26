@@ -69,12 +69,11 @@ class PdoNewsStorage
 
     public function insertUserData($post)
     {
-        
-            $pdo=$this->pdo;
-            $sql = "INSERT INTO user (username, useremail, userpassword,userrole) VALUES (?,?,?,?)";
-            $statement= $pdo->prepare($sql);
-            $result=$statement->execute([$_POST['username'], $_POST['useremail'], $_POST['userpassword'],0]);
-            return $result;
+        $pdo=$this->pdo;
+        $sql = "INSERT INTO user (username, useremail, userpassword,userrole) VALUES (?,?,?,?)";
+        $statement= $pdo->prepare($sql);
+        $result=$statement->execute([$_POST['username'], $_POST['useremail'], $_POST['userpassword'],0]);
+        return $result;
             
     }
     public function fetchLoginUserData($post)

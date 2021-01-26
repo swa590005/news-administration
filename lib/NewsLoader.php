@@ -56,13 +56,11 @@ class NewsLoader
 
     public function findOneById($id)
     {
-        
         $newsArray=$this->newsStorage->fetchSingleNewsData($id);
         $newslist = array();
         return $newslist = $this->createNewsFromData($newsArray);
     }
-    //returns object    
-    
+    //returns object  
     private function createNewsFromData(array $newsData)
     {
         $news= new News($newsData['headline'],$newsData['content']);
