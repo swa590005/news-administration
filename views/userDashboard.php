@@ -20,7 +20,7 @@ $i=1;
                     <tr>
                         <th>SI.No</th>
                         <th>Headline</th>
-                        <th>CreationDate</th>
+                        <th>Datetime</th>
                     </tr>
                 </thead>
                 <tbody>

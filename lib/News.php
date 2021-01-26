@@ -25,7 +25,7 @@ class News
     }
     public function getNewsDatetime()
     {
-        return date('d-m-Y',strtotime($this->newsdatetime));
+        return date('d-m-Y h:i A',strtotime($this->newsdatetime));
     }
     public function setNewsDatetime($newsdatetime)
     {

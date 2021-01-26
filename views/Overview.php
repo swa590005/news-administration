@@ -46,7 +46,7 @@ if(isset($_GET['deleteId']) && !empty($_GET['deleteId'])) {
         <th>SI.No</th>
         <th>Headline</th>
         <th>Content</th>
-        <th>Created Date</th>
+        <th>Datetime</th>
         <th>Status</th>
         <th>Actions</th>
       </tr>

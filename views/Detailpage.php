@@ -23,7 +23,7 @@ if(isset($_GET['editId'])){
                 <th>SI.No</th>
                 <th>Headline</th>
                 <th>Content</th>
-                <th>Created Date</th>
+                <th>Datetime</th>
             </tr>
             </thead>
             <tbody>

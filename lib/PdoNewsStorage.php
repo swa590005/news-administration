@@ -14,7 +14,7 @@ class PdoNewsStorage
         $sql = "INSERT INTO news_properties (headline, content, activeflag) VALUES (?,?,?)";
         $statement= $pdo->prepare($sql);
         $result=$statement->execute([trim($_POST['headline']), 
-                                        trim($_POST['content']),$_POST['activeflag'] ]);
+                                        trim($_POST['content']),$_POST['activeflag']]);
         return $result;
             
     }
