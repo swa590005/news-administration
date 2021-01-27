@@ -35,7 +35,6 @@ $pdo->exec('CREATE TABLE `news_properties` (
 
 // initialize the table
 $pdo->exec('DROP TABLE IF EXISTS user;');
-
 $pdo->exec('CREATE TABLE `user` (
     `id` int(11) NOT NULL AUTO_INCREMENT,
     `username` varchar(100) COLLATE utf8mb4_unicode_ci NOT NULL,
